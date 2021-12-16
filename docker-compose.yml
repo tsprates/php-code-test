@@ -10,3 +10,5 @@ services:
     volumes:
       - ./UI/src:/home/node/src
       - ./UI/build:/home/node/build
+    depends_on:
+      - lr_api
