@@ -21,6 +21,8 @@ To run your project, simply run `docker-compose up` in your terminal. Press `Ctr
 
 The `Dockerfile`s are already configured to perform an `npm install` during the build process, then `npm start` to run your code. You will need to edit the `start` command in each `package.json` file to suit your needs.
 
+The API docker container is configured to listen on port `3000`. The UI container uses `3001`.
+
 ## Replace this file
 It's a good idea to replace this file with your own `README.md` describing anything we might need to know about running your app.
 
