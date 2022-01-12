@@ -1,11 +1,6 @@
-FROM node:16-alpine
+FROM php:8.1.1-apache-bullseye
 
-WORKDIR /home/node/
+WORKDIR /var/www/html
 
-EXPOSE 3000
-
-COPY package.json .
-RUN npm i
+EXPOSE 80
 COPY src .
-
-CMD npm start
