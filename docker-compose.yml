@@ -3,8 +3,9 @@ services:
   lr_api:
     build: API/
     volumes:
-      - ./API/src:/home/node/src
-      - ./API/build:/home/node/build
+      - ./API/src:/home/php/src
+    ports:
+      - 80:80
   lr_ui:
     build: UI/
     volumes:
