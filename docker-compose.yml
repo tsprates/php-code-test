@@ -3,7 +3,7 @@ services:
   lr_api:
     build: API/
     volumes:
-      - ./API/src:/home/php/src
+      - ./API/src:/var/www/html
     ports:
       - 80:80
   lr_ui:
