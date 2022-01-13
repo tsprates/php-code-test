@@ -6,7 +6,7 @@ A jumpstart for the LifeRaft code test
 
 This repository is intended to act as a starting point for your code test. Fork this repo, then flesh it out with your own code.
 ```
-git clone https://gitlab.com/steve.day/liferaft-code-test.git
+git clone https://gitlab.com/steve.day/liferaft-php-code-test.git
 git remote add upstream https://somegithost.com/yourrepopath
 ```
 (Replace `https://somegithost.com/yourrepopath` with the URL to an empty repo you create)
@@ -19,9 +19,9 @@ The `./API` folder is where you will write the **server** portion of the code te
 ## Run with Docker
 To run your project, simply run `docker-compose up` in your terminal. Press `Ctrl+C` to stop it.
 
-The `Dockerfile`s are already configured to perform an `npm install` during the build process, then `npm start` to run your code. You will need to edit the `start` command in each `package.json` file to suit your needs.
+The `Dockerfile`s are already configured to handle all the Apache server work. You just need to provide the PHP code.
 
-The API docker container is configured to listen on port `3000`. The UI container uses `3001`.
+The API docker container is configured to listen on port `80`. The UI container uses `3001`.
 
 ## Replace this file
 It's a good idea to replace this file with your own `README.md` describing anything we might need to know about running your app.
