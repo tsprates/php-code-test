@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
@@ -33,8 +34,11 @@ class CustomerController extends Controller
         $validation = $this->makeValidation($data);
 
         if (!$validation->fails()) {
+            Storage::disk('public')->append('customers.txt', json_encode($data));
+
             return response()->json([
-                'success' => true
+                'success' => true,
+                'customer' => $data,
             ], 201);
         }
 

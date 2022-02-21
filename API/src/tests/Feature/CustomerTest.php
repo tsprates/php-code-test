@@ -19,7 +19,7 @@ class CustomerTest extends TestCase
     /**
      * Helper function for mocking customers.
      * 
-     * @return array Customer array.
+     * @return array Customer array
      */
     private function mockCustomer()
     {
@@ -50,7 +50,7 @@ class CustomerTest extends TestCase
     {
         $customer =  $this->mockCustomer();
         unset($customer['name']);
-        
+
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
         $response->assertJsonFragment(['success' => false]);
@@ -60,7 +60,7 @@ class CustomerTest extends TestCase
     {
         $customer =  $this->mockCustomer();
         $customer['name'] = ' '; // invalid name
-        
+
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
         $response->assertJsonFragment(['success' => false]);
@@ -70,7 +70,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->mockCustomer();
         $customer['email'] = 'invalid';
-        
+
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
         $response->assertJsonFragment(['success' => false]);
@@ -80,7 +80,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->mockCustomer();
         unset($customer['email']);
-        
+
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
         $response->assertJsonFragment(['success' => false]);
@@ -90,7 +90,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->mockCustomer();
         unset($customer['phone']);
-        
+
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
         $response->assertJsonFragment(['success' => false]);
@@ -100,7 +100,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->mockCustomer();
         $customer['address']['number'] = 'invalid';
-        
+
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
         $response->assertJsonFragment([
@@ -115,7 +115,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->mockCustomer();
         $customer['address']['number'] = '0'; // invalid zero number
-        
+
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
         $response->assertJsonFragment([
@@ -130,7 +130,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->mockCustomer();
         unset($customer['address']['number']);
-        
+
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
         $response->assertJsonFragment(['success' => false]);
@@ -140,7 +140,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->mockCustomer();
         unset($customer['address']['street']);
-        
+
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
         $response->assertJsonFragment(['success' => false]);
@@ -150,7 +150,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->mockCustomer();
         unset($customer['address']['city']);
-        
+
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
         $response->assertJsonFragment(['success' => false]);
@@ -160,7 +160,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->mockCustomer();
         unset($customer['address']['country']);
-        
+
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
         $response->assertJsonFragment(['success' => false]);
