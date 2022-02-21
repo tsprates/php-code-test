@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class CustomerTest extends TestCase
@@ -41,9 +42,13 @@ class CustomerTest extends TestCase
 
     public function test_create_new_customer()
     {
+        Storage::fake('public');
+
         $response = $this->post('/api/customers', $this->mockCustomer());
         $response->assertStatus(201);
         $response->assertJsonFragment(['success' => true]);
+
+        Storage::disk('public')->assertExists('customers.txt'); // if the file customers.txt exists
     }
 
     public function test_tries_to_create_a_customer_without_name()
