@@ -5,7 +5,6 @@ WORKDIR /var/www/html
 # Update package information
 RUN apt-get update \
 	&& apt-get upgrade -y
-
 RUN apt-get install zip -y
 
 # Apache
@@ -18,8 +17,8 @@ RUN curl -sS https://getcomposer.org/installer \
 
 # Laravel
 COPY src/ .
-RUN composer install
-RUN chmod -R 777 storage/
+RUN chown -R www-data:www-data /var/www
 RUN php artisan storage:link
+RUN composer install
 
 EXPOSE 80
