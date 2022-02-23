@@ -1,11 +1,16 @@
 FROM node:16-alpine
 
-WORKDIR /home/node/
+RUN npm install -g http-server
+
+WORKDIR /app
+
+COPY src/package*.json ./
+
+RUN npm i
+
+COPY src/ ./
+
+RUN npm run build
 
 EXPOSE 3001
-
-COPY package.json .
-RUN npm i
-COPY src .
-
-CMD npm start
+CMD [ "http-server", "-p", "3001", "dist" ]

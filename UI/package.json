@@ -4,7 +4,7 @@
   "description": "LifeRaft Code Test's UI",
   "main": "index.js",
   "scripts": {
-    "start": "exit 1"
+    "start": "cd src/ && npm run serve"
   },
   "author": "",
   "license": "ISC"
