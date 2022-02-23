@@ -18,7 +18,7 @@ RUN curl -sS https://getcomposer.org/installer \
 # Laravel
 COPY src/ .
 RUN chown -R www-data:www-data /var/www
-RUN php artisan storage:link
 RUN composer install
+RUN php artisan storage:link
 
 EXPOSE 80

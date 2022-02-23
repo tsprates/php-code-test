@@ -101,7 +101,7 @@
           <ca-province-list
             id="ca-province"
             ref="ca-province"
-            @usStateChange="(value) => (this.address.state = value)"
+            @caProvinceChange="(value) => (this.address.state = value)"
           />
         </c-form-control>
         <c-form-control
@@ -263,10 +263,6 @@ export default {
         },
       },
     };
-
-    if (this.address.country !== "CA" && this.address.country !== "US") {
-      validations["state"] = {};
-    }
 
     return validations;
   },

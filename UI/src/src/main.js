@@ -8,13 +8,15 @@ import Vuelidate from 'vuelidate'
 Vue.config.productionTip = false
 
 // axios
-axios.defaults.baseURL = 'http://localhost/api/';
+const HOST = process.env.API_HOST || 'localhost';
+const PORT = process.env.API_PORT || 80;
+axios.defaults.baseURL = `http://${HOST}:${PORT}/api/`;
 Vue.use(VueAxios, axios)
 
 // Chakra UI
 Vue.use(Chakra)
 
-// Vue validation
+// Vue validate
 Vue.use(Vuelidate)
 
 new Vue({
