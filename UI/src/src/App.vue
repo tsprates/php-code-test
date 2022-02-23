@@ -138,12 +138,38 @@
           </template>
         </c-form-control>
         <c-form-control>
+          <c-form-label for="street" pt="3" pb="1">Street:</c-form-label>
+          <c-input
+            id="street"
+            placeholder="Provide the street"
+            v-model.trim="$v.address['street'].$model"
+            :border-color="getcolor($v.address['street'].$error)"
+            :color="getcolor($v.address['street'].$error)"
+          />
+          <template v-if="$v.address['street'].$error">
+            <div class="form-error-msg" v-if="!$v.address['street'].required">
+              Street is required.
+            </div>
+            <div class="form-error-msg" v-if="!$v.address['street'].minLength">
+              Street must have at least
+              {{ $v.address["street"].$params.minLength.min }} letters.
+            </div>
+          </template>
+        </c-form-control>
+        <c-form-control>
           <c-form-label for="number" pt="3" pb="1">Number:</c-form-label>
           <c-input
             id="number"
-            v-model="address.number"
             placeholder="Type the house number"
+            v-model.trim="$v.address['number'].$model"
+            :border-color="getcolor($v.address['number'].$error)"
+            :color="getcolor($v.address['number'].$error)"
           />
+          <template v-if="$v.address['number'].$error">
+            <div class="form-error-msg" v-if="!$v.address['number'].required">
+              Number is required.
+            </div>
+          </template>
         </c-form-control>
         <c-box mt="5">
           <c-button
@@ -222,8 +248,17 @@ export default {
         required,
       },
       address: {
-        state: { required },
+        state: {
+          required,
+        },
+        street: {
+          required,
+          minLength: minLength(5),
+        },
         city: {
+          required,
+        },
+        number: {
           required,
         },
       },
@@ -237,8 +272,6 @@ export default {
   },
   methods: {
     submit() {
-      this.isSubmitting = true;
-
       this.$v.$touch();
 
       // validation for country and state
@@ -249,18 +282,31 @@ export default {
         this.$refs["us-state"].$v.$touch();
       }
 
-      if (this.$v.$invalid) {
-        this.showErrorToast("Error", "Something occured!");
-      } else {
-        this.showSucessToast("Sucess", "Saved successfully!");
-      }
+      if (!this.$v.$invalid) {
+        this.isSubmitting = true;
 
-      setTimeout(() => {
-        this.isSubmitting = false;
-      }, 3000);
+        this.axios
+          .post("/customers", {
+            name: this.name,
+            email: this.email,
+            phone: this.phone,
+            address: {
+              number: this.address.number,
+              street: this.address.street,
+              city: this.address.city,
+              state: this.address.state,
+              country: this.address.country,
+            },
+          })
+          .then(() => {
+            this.showSucessToast("Sucess", "Saved successfully!");
+          })
+          .catch(() => this.showErrorToast("Error", "Something occured!"))
+          .finally(() => (this.isSubmitting = false));
+      }
     },
     getcolor(value) {
-      return value ? "red" : "gray.300";
+      return value ? "red" : "gray.500";
     },
     changeCountry(value) {
       this.address.country = value;

@@ -3,7 +3,7 @@
     placeholder="Choose a state"
     @change="$emit('usStateChange', state)"
     v-model.trim="$v.state.$model"
-    :border-color="$v.state.$error ? 'red' : 'gray.300'"
+    :border-color="$v.state.$error ? 'red' : 'gray.500'"
     :color="$v.state.$error ? 'red' : 'gray.500'"
   >
     <option value="AL">Alabama</option>

@@ -3,7 +3,7 @@
     placeholder="Choose a country"
     @change="$emit('countryChange', country)"
     v-model.trim="$v.country.$model"
-    :border-color="$v.country.$error ? 'red' : 'gray.300'"
+    :border-color="$v.country.$error ? 'red' : 'gray.500'"
     :color="$v.country.$error ? 'red' : 'gray.500'"
   >
     <option value="AF">Afghanistan</option>

@@ -3,7 +3,7 @@
     placeholder="Choose a province"
     @change="$emit('caProvinceChange', province)"
     v-model.trim="$v.province.$model"
-    :border-color="$v.province.$error ? 'red' : 'gray.300'"
+    :border-color="$v.province.$error ? 'red' : 'gray.500'"
     :color="$v.province.$error ? 'red' : 'gray.500'"
   >
     <option value="AB">Alberta</option>
