@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Chakra, { CThemeProvider, CReset } from '@chakra-ui/vue'
 import App from './App.vue'
 import axios from 'axios'
+import Vuelidate from 'vuelidate'
 
 Vue.config.productionTip = false
 
@@ -11,6 +12,9 @@ Vue.use(axios)
 
 // Chakra UI
 Vue.use(Chakra)
+
+// Vue validation
+Vue.use(Vuelidate)
 
 new Vue({
   el: '#app',

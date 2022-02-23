@@ -1,9 +1,10 @@
 <template>
   <c-select
     placeholder="Choose a province"
-    v-model="province"
     @change="$emit('caProvinceChange', province)"
-    size="lg"
+    v-model.trim="$v.province.$model"
+    :border-color="$v.province.$error ? 'red' : 'gray.300'"
+    :color="$v.province.$error ? 'red' : 'gray.500'"
   >
     <option value="AB">Alberta</option>
     <option value="BC">British Columbia</option>
@@ -23,6 +24,7 @@
 
 <script>
 import { CSelect } from "@chakra-ui/vue";
+import { required } from "vuelidate/lib/validators";
 
 export default {
   name: "CaProvinceList",
@@ -33,6 +35,11 @@ export default {
     return {
       province: "",
     };
+  },
+  validations: {
+    province: {
+      required,
+    },
   },
 };
 </script>

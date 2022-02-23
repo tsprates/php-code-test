@@ -1,9 +1,10 @@
 <template>
   <c-select
     placeholder="Choose a state"
-    v-model="state"
     @change="$emit('usStateChange', state)"
-    size="lg"
+    v-model.trim="$v.state.$model"
+    :border-color="$v.state.$error ? 'red' : 'gray.300'"
+    :color="$v.state.$error ? 'red' : 'gray.500'"
   >
     <option value="AL">Alabama</option>
     <option value="AK">Alaska</option>
@@ -61,6 +62,7 @@
 
 <script>
 import { CSelect } from "@chakra-ui/vue";
+import { required } from "vuelidate/lib/validators";
 
 export default {
   name: "UsStateList",
@@ -71,6 +73,11 @@ export default {
     return {
       state: "",
     };
+  },
+  validations: {
+    state: {
+      required,
+    },
   },
 };
 </script>
