@@ -3,7 +3,7 @@
     <c-box my="5" mx="auto" p="2" w="960px">
       <c-box
         border-bottom-width="1px"
-        border-bottom-color="gray.300"
+        border-bottom-color="gray.200"
         w="100%"
         p="4"
         mb="5"
@@ -176,6 +176,7 @@
             type="submit"
             variant-color="green"
             width="100%"
+            size="lg"
             :is-loading="isSubmitting"
             >Save</c-button
           >
@@ -298,8 +299,31 @@ export default {
             this.showSucessToast("Sucess", "Saved successfully!");
           })
           .catch(() => this.showErrorToast("Error", "Something occured!"))
-          .finally(() => (this.isSubmitting = false));
+          .finally(() => {
+            this.isSubmitting = false;
+            this.clearForm();
+          });
       }
+    },
+    clearForm() {
+      // reset validation errors
+      this.$v.$reset();
+      this.$refs.country.$v.$reset();
+      if (this.address.country === "CA") {
+        this.$refs["ca-province"].$v.$reset();
+      } else if (this.address.country === "US") {
+        this.$refs["us-state"].$v.$reset();
+      }
+
+      // clear data
+      this.name = "";
+      this.email = "";
+      this.phone = "";
+      this.address.country = "";
+      this.address.state = "";
+      this.address.city = "";
+      this.address.street = "";
+      this.address.number = "";
     },
     getcolor(value) {
       return value ? "red" : "gray.500";
