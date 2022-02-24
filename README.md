@@ -1,6 +1,6 @@
 # LifeRaft Code Test
 
-### Installation
+## Installation
 
 * Clone the project:
 
@@ -20,7 +20,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-### About
+## About
 
 **Author**: Thiago Prates 
 [GitHub](https://github.com/tsprates) - [LinkedIn](https://www.linkedin.com/in/tsprates)
