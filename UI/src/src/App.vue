@@ -295,8 +295,12 @@ export default {
               country: this.address.country,
             },
           })
-          .then(() => {
-            this.showSucessToast("Sucess", "Saved successfully!");
+          .then((response) => {
+            if (response.data.success === true) {
+              this.showSucessToast("Sucess", "Saved successfully!");
+            } else {
+              this.showErrorToast("Error", "Something occured!");
+            }
           })
           .catch(() => this.showErrorToast("Error", "Something occured!"))
           .finally(() => {
@@ -308,10 +312,13 @@ export default {
     clearForm() {
       // reset validation errors
       this.$v.$reset();
+      this.$refs.country.$v.country.$model = "";
       this.$refs.country.$v.$reset();
       if (this.address.country === "CA") {
+        this.$refs["ca-province"].$v.province.$model = "";
         this.$refs["ca-province"].$v.$reset();
       } else if (this.address.country === "US") {
+        this.$refs["us-state"].$v.state.$model = "";
         this.$refs["us-state"].$v.$reset();
       }
 
