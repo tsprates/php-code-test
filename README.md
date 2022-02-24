@@ -22,5 +22,6 @@ docker-compose up -d
 
 ## About
 
-**Author**: Thiago Prates 
-[GitHub](https://github.com/tsprates) - [LinkedIn](https://www.linkedin.com/in/tsprates)
+**Author**: Thiago Prates \<[tsprates@gmail.com](mailto:tsprates@gmail.com)\>
+
+[GitHub](https://github.com/tsprates) / [LinkedIn](https://www.linkedin.com/in/tsprates)
