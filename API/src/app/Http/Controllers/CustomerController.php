@@ -61,7 +61,7 @@ class CustomerController extends Controller
             'email' => 'required|email',
             'phone' => 'required',
             'address.number' => 'required|integer|min:1',
-            'address.street' => 'required|min:5',
+            'address.street' => 'required|min:1',
             'address.city' => 'required|min:2',
             'address.state' => 'required|min:2',
             'address.country' => 'required|min:2',
