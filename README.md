@@ -20,8 +20,10 @@ docker-compose build
 docker-compose up -d
 ```
 
+* The file `customers.txt` can be found in the directory `API/src/storage/public/`.
+
 ## About
 
-**Author**: Thiago Prates \<[tsprates@gmail.com](mailto:tsprates@gmail.com)\>
+**Author**: Thiago Prates \<[tsprates@gmail.com](mailto:tsprates@gmail.com)\> 
 
 [GitHub](https://github.com/tsprates) / [LinkedIn](https://www.linkedin.com/in/tsprates)
