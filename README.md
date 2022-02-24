@@ -11,7 +11,7 @@ git clone https://github.com/tsprates/php-code-test
 * Build the project:
 
 ```sh
-docker-compose build .
+docker-compose build
 ```
 
 * Start the project:
