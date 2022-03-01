@@ -1,5 +1,6 @@
 FROM node:16-alpine
 
+# http-server for serving static content
 RUN npm install -g http-server
 
 WORKDIR /app
