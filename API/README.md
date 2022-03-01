@@ -5,13 +5,13 @@
 * Installation of the required packages:
 
 ```sh
-docker exec -it lr_api composer install
+docker-compose exec lr_api composer install
 ```
 
 * Permission to the `storage` directory: 
 
 ```sh
-docker exec -it lr_api chown -R www-data:www-data storage/
+docker-compose exec lr_api chown -R www-data:www-data storage/
 ```
 
 * *Optional*. To access `artisan`:
