@@ -30,7 +30,6 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
         $validation = $this->makeValidation($data);
 
         if (!$validation->fails()) {
