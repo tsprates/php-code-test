@@ -19,7 +19,7 @@ class CustomerTest extends TestCase
 
     /**
      * Helper function for mocking customers.
-     * 
+     *
      * @return array Customer array
      */
     private function mockCustomer()
@@ -48,7 +48,7 @@ class CustomerTest extends TestCase
         $response->assertStatus(201);
         $response->assertJsonFragment(['success' => true]);
 
-        Storage::disk('public')->assertExists('customers.txt'); // if the file customers.txt exists
+        Storage::disk('public')->assertExists('customers.txt');
     }
 
     public function test_tries_to_create_a_customer_without_name()
@@ -58,17 +58,27 @@ class CustomerTest extends TestCase
 
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
-        $response->assertJsonFragment(['success' => false]);
+        $response->assertJsonFragment([
+            'success' => false,
+            'name' => [
+                'The name field is required.'
+            ]
+        ]);
     }
 
     public function test_tries_to_create_a_customer_with_name_length_less_than_five_letters()
     {
-        $customer =  $this->mockCustomer();
-        $customer['name'] = ' '; // invalid name
+        $customer = $this->mockCustomer();
+        $customer['name'] = 'test'; // length < 5
 
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
-        $response->assertJsonFragment(['success' => false]);
+        $response->assertJsonFragment([
+            'success' => false,
+            'name' => [
+                'The name must be at least 5 characters.'
+            ]
+        ]);
     }
 
     public function test_tries_to_create_a_customer_with_invalid_email()
@@ -78,7 +88,12 @@ class CustomerTest extends TestCase
 
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
-        $response->assertJsonFragment(['success' => false]);
+        $response->assertJsonFragment([
+            'success' => false,
+            'email' => [
+                'The email must be a valid email address.'
+            ]
+        ]);
     }
 
     public function test_tries_to_create_a_customer_without_email()
@@ -88,7 +103,12 @@ class CustomerTest extends TestCase
 
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
-        $response->assertJsonFragment(['success' => false]);
+        $response->assertJsonFragment([
+            'success' => false,
+            'email' => [
+                'The email field is required.'
+            ]
+        ]);
     }
 
     public function test_tries_to_create_a_customer_without_phone_number()
@@ -98,7 +118,12 @@ class CustomerTest extends TestCase
 
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
-        $response->assertJsonFragment(['success' => false]);
+        $response->assertJsonFragment([
+            'success' => false,
+            'phone' => [
+                'The phone field is required.'
+            ]
+        ]);
     }
 
     public function test_tries_to_create_a_customer_with_invalid_house_number()
@@ -110,8 +135,8 @@ class CustomerTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonFragment([
             'success' => false,
-            "address.number" => [
-                "The address.number must be an integer."
+            'address.number' => [
+                'The address.number must be an integer.'
             ]
         ]);
     }
@@ -125,8 +150,8 @@ class CustomerTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonFragment([
             'success' => false,
-            "address.number" => [
-                "The address.number must be at least 1."
+            'address.number' => [
+                'The address.number must be at least 1.'
             ]
         ]);
     }
@@ -138,7 +163,12 @@ class CustomerTest extends TestCase
 
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
-        $response->assertJsonFragment(['success' => false]);
+        $response->assertJsonFragment([
+            'success' => false,
+            'address.number' => [
+                'The address.number field is required.'
+            ]
+        ]);
     }
 
     public function test_tries_to_create_a_customer_without_street()
@@ -148,7 +178,12 @@ class CustomerTest extends TestCase
 
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
-        $response->assertJsonFragment(['success' => false]);
+        $response->assertJsonFragment([
+            'success' => false,
+            'address.street' => [
+                'The address.street field is required.'
+            ]
+        ]);
     }
 
     public function test_tries_to_create_a_customer_without_city()
@@ -158,7 +193,12 @@ class CustomerTest extends TestCase
 
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
-        $response->assertJsonFragment(['success' => false]);
+        $response->assertJsonFragment([
+            'success' => false,
+            'address.city' => [
+                'The address.city field is required.'
+            ]
+        ]);
     }
 
     public function test_tries_to_create_a_customer_without_country()
@@ -168,6 +208,11 @@ class CustomerTest extends TestCase
 
         $response = $this->post('/api/customers', $customer);
         $response->assertStatus(422);
-        $response->assertJsonFragment(['success' => false]);
+        $response->assertJsonFragment([
+            'success' => false,
+            'address.country' => [
+                'The address.country field is required.'
+            ]
+        ]);
     }
 }
