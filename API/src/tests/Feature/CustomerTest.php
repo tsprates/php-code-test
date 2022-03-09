@@ -201,6 +201,21 @@ class CustomerTest extends TestCase
         ]);
     }
 
+    public function test_tries_to_create_a_customer_without_state()
+    {
+        $customer = $this->mockCustomer();
+        unset($customer['address']['state']);
+
+        $response = $this->post('/api/customers', $customer);
+        $response->assertStatus(422);
+        $response->assertJsonFragment([
+            'success' => false,
+            'address.state' => [
+                'The address.state field is required.'
+            ]
+        ]);
+    }
+
     public function test_tries_to_create_a_customer_without_country()
     {
         $customer = $this->mockCustomer();
