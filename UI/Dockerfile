@@ -14,4 +14,5 @@ COPY src/ ./
 RUN npm run build
 
 EXPOSE 3001
+
 CMD [ "http-server", "-p", "3001", "dist" ]
