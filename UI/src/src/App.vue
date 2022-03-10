@@ -2,12 +2,12 @@
   <div id="app">
     <c-box my="5" mx="auto" p="2" w="960px">
       <c-box
-        border-bottom-width="1px"
-        border-bottom-color="gray.200"
+        border-bottom-width="5px"
+        border-bottom-color="green.500"
         w="100%"
-        p="4"
-        mb="5"
-        font-size="3.5rem"
+        pt="1"
+        mb="2"
+        font-size="3.2rem"
         font-weight="bold"
       >
         Register Customer
@@ -171,7 +171,7 @@
             </div>
           </template>
         </c-form-control>
-        <c-box mt="5">
+        <c-box mt="10">
           <c-button
             type="submit"
             variant-color="green"
@@ -362,8 +362,5 @@ export default {
 <style scoped>
 .form-error-msg {
   color: red;
-}
-.form-error-input {
-  border-color: red;
 }
 </style>
