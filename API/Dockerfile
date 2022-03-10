@@ -4,8 +4,8 @@ WORKDIR /var/www/html
 
 # Update package information
 RUN apt-get update \
-	&& apt-get upgrade -y
-RUN apt-get install zip -y
+	&& apt-get upgrade -y \
+	&& apt-get install zip -y
 
 # Apache
 RUN a2enmod rewrite \
