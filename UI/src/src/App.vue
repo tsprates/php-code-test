@@ -301,11 +301,12 @@ export default {
             } else {
               this.showErrorToast("Error", "Something occured!");
             }
-          })
-          .catch(() => this.showErrorToast("Error", "Something occured!"))
-          .finally(() => {
             this.isSubmitting = false;
             this.clearForm();
+          })
+          .catch(() => {
+            this.showErrorToast("Error", "Something occured!");
+            this.isSubmitting = false;
           });
       }
     },
