@@ -1,4 +1,4 @@
-FROM php:8.1.1-apache-bullseye
+FROM php:8.0-apache
 
 WORKDIR /var/www/html
 
@@ -17,8 +17,6 @@ RUN curl -sS https://getcomposer.org/installer \
 
 # Laravel
 COPY src/ .
-RUN chown -R www-data:www-data /var/www
-RUN composer install --no-progress --prefer-dist --optimize-autoloader
-RUN php artisan storage:link
+RUN chown -R www-data:www-data ./storage
 
 EXPOSE 80

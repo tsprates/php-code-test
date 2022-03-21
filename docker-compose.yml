@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  lr_net:
+    driver: bridge
+
 services:
   lr_api:
     container_name: lr_api
@@ -8,6 +12,8 @@ services:
       - ./API/src:/var/www/html
     ports:
       - 80:80
+    networks:
+      - lr_net
   lr_ui:
     container_name: lr_ui
     build: UI/
@@ -19,5 +25,7 @@ services:
       - ./UI/build:/home/node/build
     ports:
       - 3001:3001
+    networks:
+      - lr_net
     depends_on:
       - lr_api
