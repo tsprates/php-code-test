@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Validation\Validator as ValidationValidator;
+use App\Http\Requests\StoreCustomerRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +30,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $validation = $this->makeValidation($data);
+        $validation = Validator::make($data, (new StoreCustomerRequest())->rules());
 
         if (!$validation->fails()) {
             Storage::disk('public')->append('customers.txt', json_encode($data));
@@ -45,25 +45,5 @@ class CustomerController extends Controller
             'success' => false,
             'errors' => $validation->errors(),
         ], 422);
-    }
-
-    /**
-     * Makes a customer validator.
-     * 
-     * @param array $customerArray 
-     * @return ValidationValidator 
-     */
-    private function makeValidation(array $customerArray)
-    {
-        return Validator::make($customerArray,  [
-            'name' => 'required|min:5',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'address.number' => 'required|integer|min:1',
-            'address.street' => 'required|min:1',
-            'address.city' => 'required|min:2',
-            'address.state' => 'required|min:2',
-            'address.country' => 'required|min:2',
-        ]);
     }
 }
