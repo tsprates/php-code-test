@@ -20,12 +20,6 @@ docker-compose build
 docker-compose up -d
 ```
 
-* Install Laravel dependencies:
-
-```sh
-docker-compose exec lr_api composer install
-```
-
 > Note: The file `customers.txt` can be found in the directory `API/src/storage/public/`.
 
 ## About

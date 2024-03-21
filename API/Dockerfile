@@ -1,11 +1,14 @@
 FROM php:8.0-apache
 
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
 WORKDIR /var/www/html
 
 # Update package information
-RUN apt-get update \
-	&& apt-get upgrade -y \
-	&& apt-get install zip -y
+RUN apt-get update && apt-get install -y \
+	unzip \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Apache
 RUN a2enmod rewrite \
@@ -18,5 +21,9 @@ RUN curl -sS https://getcomposer.org/installer \
 # Laravel
 COPY src/ .
 RUN chown -R www-data:www-data ./storage
+COPY src/.env.example ./.env
+RUN composer dump-autoload \
+	&& composer install
+RUN php artisan key:generate
 
 EXPOSE 80
